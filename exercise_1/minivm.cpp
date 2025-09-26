@@ -1,6 +1,6 @@
 /*
 #!/bin/sh
-clang -O3 -fno-slp-vectorize -std=c++17 minivm.cpp -o minivm-macho
+
 zig c++ -target x86_64-linux -std=c++20 -O3 -fno-slp-vectorize minivm.cpp -o minivm-elf
 zig c++ -target x86_64-windows -std=c++20 -O3 -fno-slp-vectorize minivm.cpp -o minivm-windows
 */
@@ -248,11 +248,18 @@ constexpr uint8_t bytecode1[] =
 */
 
 constexpr uint8_t bytecode1[] = {
+    MUL(REG(0), REG(1), REG(2)),
+    RET(REG(0)),
+};
+
+/*
+constexpr uint8_t bytecode1[] = {
     OR(REG(4), REG(0), REG(1)),
     XOR(REG(5), REG(2), REG(3)),
     ADD(REG(6), REG(4), REG(5)),
     RET(REG(6)),
 };
+*/
 
 constexpr static VMLabels labels1 = VMLabels(bytecode1);
 
@@ -304,3 +311,4 @@ int main(int argc, char** argv)
     auto ret = vm_bytecode1(args[0], args[1], args[2], args[3]);
     printf("result: %" PRIi64 "\n", ret);
 }
+clang - O3 - fno - slp - vectorize - std = c++ 17 minivm.cpp - o minivm - macho
